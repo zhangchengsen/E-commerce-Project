@@ -1,0 +1,6 @@
+html,body,#app{
+    background-color: rgb(58, 112, 212);
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
