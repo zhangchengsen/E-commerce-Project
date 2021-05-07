@@ -49,12 +49,13 @@ export default {
           this.$refs.loginFormRef.validate(async (valid)=>{
               if(!valid) return 
               const {data : res} = await this.$http.post('login',this.loginForm)
-              console.log(res);
+
               if(res.meta.status != 200) 
               {
                   return this.$message.error({message:"用户名或密码错误",duration:1600})
               }
-              window.sessionStorage.setItem('token',res.token)
+          
+              window.sessionStorage.setItem('token',res.data.token)
               this.$router.push('/home')
           })
       }
