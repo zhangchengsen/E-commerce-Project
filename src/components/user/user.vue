@@ -120,7 +120,12 @@
               placement="top"
               :enterable="false"
             >
-              <el-button type="warning" icon="el-icon-setting" size="mini">
+              <el-button
+                @click="setRights(msg.row)"
+                type="warning"
+                icon="el-icon-setting"
+                size="mini"
+              >
               </el-button>
             </el-tooltip>
           </template>
@@ -170,6 +175,24 @@
         </span>
       </el-dialog>
       <!-- 用户修改 对话框 -->
+      <el-dialog title="提示" :visible.sync="setRightsVis" width="30%">
+        <p>当前用户 : {{ userInfo.username }}</p>
+        <p>当前角色 : {{ userInfo.role_name }}</p>
+        <el-select v-model="setRightsMes" placeholder="请选择">
+          <el-option
+            v-for="item in setRightsPerson"
+            :key="item.id"
+            :label="item.roleName"
+            :value="item.id"
+          >
+          </el-option>
+        </el-select>
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="setRightsVis = false">取 消</el-button>
+          <el-button type="primary" @click="setRoleRights">确 定</el-button>
+        </span>
+      </el-dialog>
+      <!-- 用户权限修改 对话框 -->
     </el-card>
   </div>
 </template>
@@ -257,6 +280,11 @@ export default {
           },
         ],
       },
+      roleRights: {},
+      setRightsVis: false,
+      setRightsMes: "",
+      setRightsPerson: [],
+      userInfo: {},
     };
   },
   created() {
@@ -350,6 +378,29 @@ export default {
       }
       this.getUserList();
       return this.$message.success("删除成功");
+    },
+    setRights: async function (msg) {
+      console.log(msg);
+      this.setRightsVis = true;
+      this.userInfo = msg;
+      const { data: res } = await this.$http.get("roles");
+      if (res.meta.status != 200)
+        return this.$message.error("获取用户信息失败");
+      console.log(res.data);
+      this.setRightsPerson = res.data;
+    },
+    setRoleRights: async function () {
+      const { data: res } = await this.$http.put(
+        `users/${this.userInfo.id}/role`,
+        {
+          rid: this.setRightsMes,
+        }
+      );
+      if (res.meta.status != 200) return this.$message.error(res.meta.msg);
+      this.getUserList();
+      this.$message.success("修改成功");
+      this.setRightsVis = false;
+      this.setRightsMes = "";
     },
   },
 };
