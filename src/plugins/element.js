@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { Button, Form, Input, FormItem, Message, Container, Main, Header, Aside, Menu, MenuItem, Submenu, MenuItemGroup, Breadcrumb, BreadcrumbItem, Col, Row, Card, Table, TableColumn, Switch, Tooltip, Pagination, Dialog, MessageBox, Tag, Calendar, Tree, Select, Option, Cascader, Tabs, TabPane, Alert } from 'element-ui'
+import { Button, Form, Input, FormItem, Message, Container, Main, Header, Aside, Menu, MenuItem, Submenu, MenuItemGroup, Breadcrumb, BreadcrumbItem, Col, Row, Card, Table, TableColumn, Switch, Tooltip, Pagination, Dialog, MessageBox, Tag, Calendar, Tree, Select, Option, Cascader, Tabs, TabPane, Alert, Step, Steps, Checkbox, CheckboxGroup, Upload } from 'element-ui'
 
 Vue.use(Button)
 Vue.use(Calendar)
@@ -33,6 +33,11 @@ Vue.use(Select)
 Vue.use(Option)
 Vue.use(Cascader)
 Vue.use(Tabs)
+Vue.use(Step)
+Vue.use(Steps)
+Vue.use(Checkbox)
+Vue.use(CheckboxGroup)
+Vue.use(Upload)
 
 
 

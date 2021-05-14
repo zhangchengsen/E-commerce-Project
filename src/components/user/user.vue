@@ -135,13 +135,14 @@
       <el-pagination
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
-        :current-page.sync="queryInfo.page"
+        :current-page.sync="queryInfo.pagenum"
         :page-size="queryInfo.pagesize"
         layout="total, prev, pager, next ,jumper"
         :total="total"
       >
-        <!-- 分页功能 -->
       </el-pagination>
+      <!-- 分页功能 -->
+
       <!--表格区域 -->
       <!-- 用户修改 对话框 -->
       <el-dialog
@@ -300,10 +301,13 @@ export default {
       this.userList = res.data.users;
     },
     handleSizeChange: function (newsize) {
-      console.log(newsize);
+      this.queryInfo.pagesize = newsize;
+      this.getUserList();
     },
     handleCurrentChange: function (newpage) {
-      console.log(newpage);
+      this.queryInfo.pagenum = newpage;
+
+      this.getUserList();
     },
     stateChange: async function (userState) {
       const { data: res } = await this.$http.put(
