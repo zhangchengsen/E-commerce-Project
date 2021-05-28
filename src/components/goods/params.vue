@@ -336,7 +336,6 @@ export default {
     },
     // 写完标签
     blurTag: async function (msg) {
-      console.log(msg.inputVal.trim().length);
       if (msg.inputVal.trim().length == 0) {
         row.inputVal = "";
         row.inputVis = false;

@@ -199,14 +199,12 @@ export default {
   methods: {
     getRoleMes: async function () {
       const { data: res } = await this.$http.get("roles");
-      console.log(res);
       if (res.meta.status != 200)
         return this.$message.error("获取用户详情失败");
       this.roleMes = res.data;
     },
     roleEdit: async function (id) {
       const { data: res } = await this.$http.get("roles/" + id);
-      console.log(res);
       if (res.meta.status != 200) {
         return this.$message.error("发生错误");
       }
@@ -264,7 +262,6 @@ export default {
       }).catch((err) => err);
       if (select != "confirm") return this.$message.info("删除取消");
       const { data: res } = await this.$http.delete("roles/" + id);
-      console.log(res);
       if (res.meta.status != 200) {
         return this.$message.error("出错了,删除失败");
       }

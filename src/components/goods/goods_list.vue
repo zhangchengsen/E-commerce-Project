@@ -181,11 +181,9 @@ export default {
         return this.$message.error("获取编辑信息失败");
       this.editVis = true;
       this.editForm = res.data;
-      console.log(this.editForm);
     },
     // 提交编辑
     async editFormSubmit() {
-      console.log(this.editForm);
       this.$refs.editFormRef.validate((valid) => {
         if (!valid) return this.$message.error("请正确填写各种项");
       });

@@ -157,7 +157,6 @@ export default {
         item.order = i + (this.queryInfo.pagenum - 1) * 5;
       });
       this.total = res.data.total;
-      console.log(this.orderMes);
     },
     pageChange(newpage) {
       this.queryInfo.pagenum = newpage;
@@ -177,17 +176,17 @@ export default {
       }
     },
     editMesSubmit() {
-      this.editVis = false;
-      this.$ref.editFormRef.validate((valid) => {
+      this.$refs.editFormRef.validate((valid) => {
         if (!valid) return this.$message.error("请重新填写表单");
       });
       this.$message.success("信息修改成功");
+      this.editVis = false;
+
       // 等待接口...
     },
     async requireMes(msg) {
       this.deliverVis = true;
       this.visMes = deliverdata[msg.order];
-      console.log(msg.order);
     },
   },
 };

@@ -163,7 +163,7 @@ export default {
       uploadHeader: {
         Authorization: window.sessionStorage.getItem("token"),
       },
-      uploadURL: "http://127.0.0.1:8888/api/private/v1/upload",
+      uploadURL: "http://39.96.217.68:8801/api/private/v1/upload",
       imgSrc: "",
       imgVis: false,
     };
@@ -202,7 +202,6 @@ export default {
             item.attr_vals == "" ? [] : item.attr_vals.split(" ");
         });
         this.paramsData = res.data;
-        console.log(this.paramsData);
 
         // 静态
         const { data: ret } = await this.$http.get(
@@ -221,7 +220,6 @@ export default {
     // 预览图片
     handlePreview(file) {
       this.imgSrc = file.response.data.url;
-      console.log(this.imgSrc);
       this.imgVis = true;
     },
     // 删除图片
@@ -264,8 +262,8 @@ export default {
       });
       form.attrs = this.addFormData.attrs;
       const { data: res } = await this.$http.post("goods", form);
-      console.log(res);
-      if (res.meta.status != 201) return this.$message.error("添加请求失败");
+      if (res.meta.status != 201)
+        return this.$message.error("添加请求失败 " + res.meta.msg);
       this.$message.success("添加成功");
       this.$router.push("/categories");
     },

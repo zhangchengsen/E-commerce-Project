@@ -321,7 +321,7 @@ export default {
     },
     submit: function () {
       this.$refs.addUserRef.validate(async (valid) => {
-        if (!valid) return;
+        if (!valid) return this.$message.error("创建失败,请填写好表单项!");
         const { data: res } = await this.$http.post("users", this.addUser);
         if (res.meta.status != 201)
           return this.$message.error("创建失败,请重新尝试");
@@ -376,7 +376,6 @@ export default {
       ).catch((err) => err);
       if (select != "confirm") return this.$message.info("删除取消");
       const { data: res } = await this.$http.delete("users/" + id);
-      console.log(res);
       if (res.meta.status != 200) {
         return this.$message.error("出错了,删除失败");
       }
@@ -384,13 +383,11 @@ export default {
       return this.$message.success("删除成功");
     },
     setRights: async function (msg) {
-      console.log(msg);
       this.setRightsVis = true;
       this.userInfo = msg;
       const { data: res } = await this.$http.get("roles");
       if (res.meta.status != 200)
         return this.$message.error("获取用户信息失败");
-      console.log(res.data);
       this.setRightsPerson = res.data;
     },
     setRoleRights: async function () {

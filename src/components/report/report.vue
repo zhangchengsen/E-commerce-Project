@@ -51,7 +51,6 @@ export default {
   async mounted() {
     var myChart = echarts.init(document.getElementById("main"));
     const { data: res } = await this.$http.get("reports/type/1");
-    console.log(res);
     if (res.meta.status != 200) return this.$message.error("信息获取失败");
     const charts = _.merge(res.data, this.options);
     myChart.setOption(charts);
